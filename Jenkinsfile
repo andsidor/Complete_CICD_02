@@ -14,7 +14,7 @@ pipeline {
 		}
 		stage('uNIT TESTS'){
 			steps {
-				sh 'mvn test'
+				sh 'npm test'
 				sh 'npm intall'
 				sh 'npm run test'
 				
