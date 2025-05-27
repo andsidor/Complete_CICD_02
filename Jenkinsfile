@@ -1,12 +1,6 @@
 pipeline {
 	agent any
-	tools {
-		
-	}
-	environment {
-		SONAR_PROJECT_KEY = 'complete-cicd-02'
-
-	}
+	
 	stages {
 		stage('GitHub'){
 			steps {
