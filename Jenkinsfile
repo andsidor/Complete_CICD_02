@@ -6,6 +6,7 @@ pipeline {
 	environment {
 		SONAR_SCANNER_HOME = tool 'SonarCubeScanner'
 		SONAR_PROJECT_KEY = 'complete-cicd'
+		DOCKER_HUB_REPO = 'asidor23/complete-cicd'
 	}
 
 	stages {
@@ -32,10 +33,22 @@ pipeline {
 						-Dsonar.host.url=http://sonarqube-dind:9000 \
 						-Dsonar.login=${SONAR_TOKEN}
 						"""
-    // some block
+    
 }
 }
 				
+			}
+	
+		}
+		stage('Docker Build Image') {
+			steps {
+				script{
+					docker.build("${DOCKER_HUB_REPO}:latest")
+
+
+					}
+
+				}
 			}
 		}
 	}
