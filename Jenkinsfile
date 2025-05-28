@@ -33,9 +33,8 @@ pipeline {
 						-Dsonar.host.url=http://sonarqube-dind:9000 \
 						-Dsonar.login=${SONAR_TOKEN}
 						"""
-    
-}
-}
+						}
+                    }
 				
 			}
 	
