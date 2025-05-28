@@ -3,7 +3,7 @@ pipeline {
 	tools {
 		nodejs 'NodeJS'		
 	}
-	
+
 	stages {
 		stage('GitHub'){
 			steps {
@@ -14,8 +14,8 @@ pipeline {
 			steps {
 				sh 'npm test'
 				sh 'npm intall'
-				sh 'npm run test'
 			}
 		}
+	}
 }
-}
+
