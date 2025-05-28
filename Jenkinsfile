@@ -12,7 +12,7 @@ pipeline {
 			}
 		}
 		}
-		stage('uNIT TESTS'){
+		stage('Unit Tests') {
 			steps {
 				sh 'npm test'
 				sh 'npm intall'
