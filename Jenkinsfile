@@ -47,7 +47,7 @@ pipeline {
 		}
 		stage('Trivy Scan') {
 			steps {
-				sh """ trivy --s HIGH,CRITICAL --no-progress --format table -o trivy-report.html image ${JOB_NAME_NOW}:latest """
+				sh """ trivy --no-progress --format table -o trivy-report.html image ${JOB_NAME_NOW}:latest """
 			}
 		}
 		
