@@ -34,7 +34,7 @@ pipeline {
 						-Dsonar.login=${SONAR_TOKEN}
 						"""
 					}
-                }
+                		}
 			}
 		}
 		stage('Docker Build Image') {
