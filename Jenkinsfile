@@ -33,23 +33,18 @@ pipeline {
 						-Dsonar.host.url=http://sonarqube-dind:9000 \
 						-Dsonar.login=${SONAR_TOKEN}
 						"""
-						}
-                    }
-				
+					}
+                }
 			}
-	
 		}
 		stage('Docker Build Image') {
 			steps {
 				script{
 					docker.build("${DOCKER_HUB_REPO}:latest")
-
-
-					}
-
 				}
 			}
 		}
+	}
 }
 
 
