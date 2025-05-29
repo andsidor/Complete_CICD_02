@@ -6,7 +6,8 @@ pipeline {
 	environment {
 		SONAR_SCANNER_HOME = tool 'SonarCubeScanner'
 		SONAR_PROJECT_KEY = 'complete-cicd'
-		DOCKER_HUB_REPO = 'asidor23/complete-cicd'
+		JOB_NAME_NOW = 'cicd02'
+		
 	}
 
 	stages {
@@ -39,6 +40,14 @@ pipeline {
 		}
 		stage('Docker Build Image') {
 			steps {
+				script{
+					docker.build("${JOB_NAME_NOW}:latest")
+				}
+			}
+		}
+		stage('Trivy Scan') {
+			steps {
+				sh 'trivy --severity HIGH, CRITICAL --no-progress --format table -o trivy-report.html ${JOB_NAME_NOW}:latest '
 				script{
 					docker.build("${DOCKER_HUB_REPO}:latest")
 				}
