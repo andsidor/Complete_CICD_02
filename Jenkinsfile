@@ -51,7 +51,7 @@ pipeline {
 		}
 		stage('Trivy Scan'){
 			steps {
-				sh 'trivy --severity HIGH,CRITICAL --no-progress --format table -o trivy-report.html image ${JOB_NAME_NOW}:latest'
+				sh """trivy --severity HIGH,CRITICAL --no-progress --format table -o trivy-report.html image ${JOB_NAME_NOW}:latest"""
 			}
 		}
 		stage('Login to ECR'){
@@ -64,7 +64,7 @@ pipeline {
 		stage('Push Image to ECR'){
 			steps {
 				script {
-				docker.image("${ECR_REGISTRY}/${ECR_REPO}:${IMAGE_TAG}").push()
+				docker.image("${ECR_REGISTRY}/${ECR_REPO}:${IMAGE_TAG}").push()'
 				}
 			}
 		}
