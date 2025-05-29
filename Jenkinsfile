@@ -64,8 +64,7 @@ pipeline {
 					docker.image("${ECR_REGISTRY}/${ECR_REPO}:${IMAGE_TAG}").push()
 				}
 		}
-		
+		}
+	
 	}
 }
-
-
