@@ -7,6 +7,9 @@ pipeline {
 		SONAR_SCANNER_HOME = tool 'SonarCubeScanner'
 		SONAR_PROJECT_KEY = 'complete-cicd'
 		JOB_NAME_NOW = 'cicd02'
+		IMAGE_TAG = 'latest'
+		ECR_REGISTRY = '024848459679.dkr.ecr.us-east-1.amazonaws.com'
+		ECR_REPO = 'jenkinsawsrepo'
 		
 	}
 
@@ -41,14 +44,25 @@ pipeline {
 		stage('Docker Build Image') {
 			steps {
 				script{
-					docker.build("${JOB_NAME_NOW}:latest")
+					docker.build("${ECR_REGISTRY}/${ECR_REPO}:${IMAGE_TAG}")
 				}
 			}
 		}
 		stage('Trivy Scan') {
 			steps {
-				sh """ trivy image ${JOB_NAME_NOW}:latest """
+				sh """ trivy --no-progress --format table -o trivy-report.html image ${JOB_NAME_NOW}:latest """
 			}
+		}
+		stage('Login ECR') {
+			steps {
+				sh """aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 024848459679.dkr.ecr.us-east-1.amazonaws.com """
+			}
+		}
+		stage('Push to ECR') {
+			steps {
+				script{
+					docker.image("${ECR_REGISTRY}/${ECR_REPO}:${IMAGE_TAG}").push()
+				}
 		}
 		
 	}
