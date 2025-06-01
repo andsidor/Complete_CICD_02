@@ -23,6 +23,7 @@ pipeline {
 			steps {
 				sh 'npm test'
 				sh 'npm install'
+				sh 'npm audit'
 			}
 		}
 		stage('SonarQube Analysis') {
