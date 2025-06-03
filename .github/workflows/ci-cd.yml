@@ -88,5 +88,11 @@ jobs:
         run: |
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/github-action-cicd:latest
 
+      # Update Kubeconfig
+      - name: Update kubeconfig
+        run: aws eks --region ${{ secrets.AWS_REGION }} update-kubeconfig --name actions-eks-cluster
+
+    
+
 
 
