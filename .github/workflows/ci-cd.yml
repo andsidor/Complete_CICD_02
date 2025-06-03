@@ -42,7 +42,7 @@ jobs:
 
       - name: Build Docker
         run: |
-              docker build -t actions-app:${{ github.sha}} .
+              docker build -t github-action-cicd:${{ github.sha}} .
               docker tag actions-app:${{ github.sha}} ${{ secrets.ECR_REPOSITORY_URI}}/github-action-cicd:latest 
               docker tag actions-app:${{ github.sha}} ${{ secrets.DOCKERHUB_USERNAME }}/github-action-cicd:latest
 
